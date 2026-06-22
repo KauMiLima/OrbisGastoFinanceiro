@@ -3,164 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orbis - Dashboard Financeiro </title>
+    <title>Orbis - Autenticação</title>
     <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <script src="js/global.js" defer></script>
-    <script src="js/dashboard.js" defer></script>
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <div class="app-container">
-      <aside class="sidebar" id="sidebar-main">
-        <div class="sidebar-top">
-          <div class="app-logo">
-            <div class="logo-icon"></div>
-            <span class="sidebar-text">Fluxo</span>
-          </div>
-          <nav class="sidebar-nav">
-            <a href="index.html" class="nav-item active">
-              <span>📊</span> <span class="sidebar-text">Dashboard</span>
-            </a>
-            <a href="transacoes.html" class="nav-item">
-              <span>💸</span> <span class="sidebar-text">Transações</span>
-            </a>
-            <a href="metas.html" class="nav-item">
-              <span>🎯</span> <span class="sidebar-text">Metas</span>
-            </a>
-          </nav>
+    <div class="login-wrapper">
+      <div class="login-card" id="card-autenticacao">
+        <div class="login-header">
+          <div class="logo-ponto"></div>
+          <h2>Aceder ao Fluxo</h2>
+          <p>Gerencie suas finanças com alto padrão</p>
         </div>
 
-        <div class="sidebar-footer">
-          <div class="user-profile">
-            <div class="avatar">U</div>
-            <div class="user-info sidebar-text">
-              <span class="user-name" class="sidebar-text">Usuário</span>
-              <span class="user-plan" class="sidebar-text">Plano Premium</span>
-            </div>
-          </div>
-          <button id="btn-logout" class="btn-logout">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-            Sair da Conta
-          </button>
-        </div>
-      </aside>
-
-      <button class="sidebar-toggle" id="btn-sidebar-toggle">☰</button>
-
-      <main class="main-content">
-        <header class="content-header">
-          <div class="greeting-box">
-            <h1>Visão Geral</h1>
-            <p>Aqui está o resumo do seu fluxo de caixa.</p>
-          </div>
-          <div class="header-actions">
-            <button id="btn-blur" class="btn btn-secondary">
-              👁️ Modo Oculto
-            </button>
-          </div>
-        </header>
-
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-label">Balanço Total</div>
-            <div class="metric-value privacy-blur" id="total-balance">
-              R$ 0,00
-            </div>
-            <div class="metric-sub">No período selecionado</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Entradas</div>
-            <div class="metric-value privacy-blur pos" id="total-income">
-              R$ 0,00
-            </div>
-            <div class="metric-sub">No período selecionado</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Saídas</div>
-            <div class="metric-value privacy-blur neg" id="total-expense">
-              R$ 0,00
-            </div>
-            <div class="metric-sub">No período selecionado</div>
-          </div>
+        <div class="tabs-control">
+          <button class="tab-btn active" id="tab-entrar">Entrar</button>
+          <button class="tab-btn" id="tab-cadastrar">Criar Conta</button>
         </div>
 
-        <section class="chart-section">
-          <div class="section-header">
-            <h3>Fluxo de Caixa</h3>
-            <div style="display: flex; gap: 8px">
-              <select
-                id="filter-mes-global"
-                class="btn btn-secondary"
-                style="padding: 6px; font-size: 12px; border-radius: 6px"
-              >
-                <option value="todos">Todos os Meses</option>
-                <option value="01">Janeiro</option>
-                <option value="02">Fevereiro</option>
-                <option value="03">Março</option>
-                <option value="04">Abril</option>
-                <option value="05">Maio</option>
-                <option value="06">Junho</option>
-                <option value="07">Julho</option>
-                <option value="08">Agosto</option>
-                <option value="09">Setembro</option>
-                <option value="10">Outubro</option>
-                <option value="11">Novembro</option>
-                <option value="12">Dezembro</option>
-              </select>
-              <select
-                id="filter-ano-global"
-                class="btn btn-secondary"
-                style="padding: 6px; font-size: 12px; border-radius: 6px"
-              >
-                <option value="todos">Todos os Anos</option>
-              </select>
-            </div>
+        <form id="form-autenticar">
+          <div class="form-group-comum" id="grupo-nome" style="display: none">
+            <label for="login-nome">Nome Completo</label>
+            <input type="text" id="login-nome" placeholder="Ex: Kauã Silva" />
           </div>
-          <div class="chart-legend" id="chart-status" style="margin-top: 12px">
-            Balanço do Período Filtrado: R$ 0,00
-          </div>
-          <div class="chart-wrapper">
-            <canvas id="mainFinanceChart"></canvas>
-          </div>
-        </section>
-      </main>
 
-      <aside class="right-panel">
-        <div class="quick-add-box">
-          <h3 style="font-size: 14px; margin-bottom: 8px">Inserção Rápida</h3>
-          <div class="quick-add-input-wrap">
+          <div class="form-group-comum">
+            <label for="login-email">E-mail Corporativo</label>
             <input
-              type="text"
-              id="quick-input"
-              placeholder="-35 Lanche ou +120 Freela"
+              type="email"
+              id="login-email"
+              required
+              placeholder="seu@email.com"
             />
-            <button id="quick-add-btn" class="pos" style="background: none">
-              ➔
-            </button>
           </div>
+
+          <div class="form-group-comum">
+            <label for="login-senha">Senha de Acesso</label>
+            <input
+              type="password"
+              id="login-senha"
+              required
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="btn-submit-auth"
+            style="width: 100%; margin-top: 10px"
+          >
+            Acessar Painel
+          </button>
+        </form>
+      </div>
+
+      <div
+        class="login-card dev-panel-card"
+        id="card-developer"
+        style="display: none"
+      >
+        <div class="login-header">
+          <div
+            class="logo-ponto"
+            style="
+              background-color: #ef4444;
+              box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);
+            "
+          ></div>
+          <h2>Console do Desenvolvedor</h2>
+          <p>Auditoria de Contas e Gerenciamento Interno</p>
         </div>
 
-        <div>
-          <h3 style="font-size: 14px; margin-bottom: 16px">
-            Atividade Recente
-          </h3>
-          <div id="transaction-container"></div>
+        <div style="text-align: left; margin-bottom: 20px">
+          <h4
+            style="
+              font-size: 11px;
+              text-transform: uppercase;
+              color: var(--text-muted);
+              margin-bottom: 12px;
+              letter-spacing: 0.5px;
+            "
+          >
+            Usuários Registrados no LocalStorage
+          </h4>
+          <div
+            id="dev-lista-usuarios"
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              max-height: 280px;
+              overflow-y: auto;
+              padding-right: 5px;
+            "
+          ></div>
         </div>
-      </aside>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="btn-fechar-dev"
+          style="width: 100%"
+        >
+          Voltar para o Login
+        </button>
+      </div>
     </div>
+
+    <script src="js/global.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>
