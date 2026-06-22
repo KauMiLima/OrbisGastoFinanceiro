@@ -1,6 +1,9 @@
+// global.js - Código Completo e Corrigido para Sincronização Mobile
+
 const sessao = JSON.parse(localStorage.getItem("fluxo_sessao_ativa"));
 const paginaAtual = window.location.pathname.split("/").pop();
 
+// Lógica de proteção de rotas
 if (!sessao || Date.now() > sessao.expira) {
     localStorage.removeItem("fluxo_sessao_ativa");
     if (paginaAtual !== "index.html" && paginaAtual !== "") {
@@ -12,14 +15,19 @@ if (!sessao || Date.now() > sessao.expira) {
     }
 }
 
+// CORREÇÃO: Função Blindada para o Mobile
+// Normaliza o e-mail para minúsculas (trim/toLowerCase).
+// Isso resolve o problema de "Admin" vs "admin" serem chaves diferentes.
 function obterChaveUsuario(sufixo) {
     if (!sessao || !sessao.email) return sufixo;
-    return `user_${sessao.email}_${sufixo}`;
+    const emailNormalizado = sessao.email.trim().toLowerCase();
+    return `user_${emailNormalizado}_${sufixo}`;
 }
 
 const fmtBRL = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Lógica da Sidebar
     const btnToggle = document.getElementById('btn-sidebar-toggle');
     const sidebar = document.getElementById('sidebar-main');
     
@@ -38,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sidebar.classList.add('collapsed');
     }
     
+    // Perfil do Usuário
     if (sessao && sessao.user) {
         const userNameSidebar = document.querySelector(".user-name");
         const avatarEl = document.querySelector(".avatar");
@@ -46,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (avatarEl) avatarEl.innerText = sessao.user.charAt(0).toUpperCase();
     }
     
+    // Inicialização de Componentes
     if (typeof renderizarListaAtividadeRecente === "function") renderizarListaAtividadeRecente();
     if (typeof inicializarModoAnonimato === "function") inicializarModoAnonimato();
     
@@ -62,6 +72,8 @@ document.addEventListener("click", (e) => {
         window.location.href = "index.html"; 
     }
 });
+
+// --- FUNÇÕES DE LÓGICA DO APP ---
 
 function renderizarListaAtividadeRecente() {
     const container = document.getElementById("transaction-container");
