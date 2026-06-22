@@ -1,15 +1,12 @@
 const sessao = JSON.parse(localStorage.getItem("fluxo_sessao_ativa"));
 const paginaAtual = window.location.pathname.split("/").pop();
 
-// Adicionamos uma pequena verificação para evitar o redirecionamento indesejado
 if (!sessao || Date.now() > sessao.expira) {
     localStorage.removeItem("fluxo_sessao_ativa");
-    // Só redireciona para o index (login) se NÃO estiver já no index
     if (paginaAtual !== "index.html" && paginaAtual !== "") {
         window.location.href = "index.html";
     }
 } else {
-    // Se estiver logado e estiver no index (login), mande para o dashboard
     if (paginaAtual === "index.html" || paginaAtual === "") {
         window.location.href = "dashboard.html";
     }
@@ -23,14 +20,12 @@ function obterChaveUsuario(sufixo) {
 const fmtBRL = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 📌 Lógica ÚNICA da Sidebar para evitar bugs na animação [cite: 7, 8, 20]
     const btnToggle = document.getElementById('btn-sidebar-toggle');
     const sidebar = document.getElementById('sidebar-main');
     
     if (btnToggle && sidebar) {
         btnToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
-            // Opcional: salvar estado no localStorage se quiser persistir entre páginas
             if (sidebar.classList.contains('collapsed')) {
                 localStorage.setItem('fluxo_sidebar_collapsed', 'true');
             } else {
@@ -39,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Carregar estado persistente da sidebar
     if (localStorage.getItem('fluxo_sidebar_collapsed') === 'true' && sidebar) {
         sidebar.classList.add('collapsed');
     }
@@ -52,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (avatarEl) avatarEl.innerText = sessao.user.charAt(0).toUpperCase();
     }
     
-    // Inicialização de outras funcionalidades globais
     if (typeof renderizarListaAtividadeRecente === "function") renderizarListaAtividadeRecente();
     if (typeof inicializarModoAnonimato === "function") inicializarModoAnonimato();
     
@@ -61,13 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Lógica do botão de logout
 document.addEventListener("click", (e) => {
     const btnLogout = e.target.closest("#btn-logout");
     if (btnLogout) {
         e.preventDefault();
         localStorage.removeItem("fluxo_sessao_ativa");
-        window.location.href = "index.html"; // Redireciona para o login
+        window.location.href = "index.html"; 
     }
 });
 

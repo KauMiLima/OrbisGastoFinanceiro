@@ -53,7 +53,6 @@ a {
     background: var(--border-focus);
 }
 
-/* Estrutura de Três Colunas do Layout */
 .app-container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr 340px;
@@ -63,12 +62,10 @@ a {
     transition: var(--transition-premium);
 }
 
-/* 📌 Controle do encolhimento da Sidebar no Grid (Desaparece completamente) */
 .app-container:has(.sidebar.collapsed) {
     --sidebar-width: 0px; 
 }
 
-/* Sidebar Avançada Telescópica */
 .sidebar {
     background-color: var(--bg-card);
     border-right: 1px solid var(--border-color);
@@ -80,14 +77,13 @@ a {
     position: sticky;
     top: 0;
     width: var(--sidebar-width);
-    min-width: 260px; /* Mantém o layout interno intacto */
+    min-width: 260px;
     transition: var(--transition-premium);
     z-index: 2000;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-/* 📌 Quando fechada, ela sai da tela totalmente e some do documento */
 .sidebar.collapsed {
     transform: translateX(-100%);
     padding: 0;
@@ -95,7 +91,6 @@ a {
     visibility: hidden;
 }
 
-/* SINCRONIZAÇÃO DO BOTÃO COM A BORDA DA BARRA LATERAL */
 .sidebar-toggle {
     position: fixed;
     top: 24px;
@@ -121,7 +116,6 @@ a {
     color: var(--color-accent);
 }
 
-/* 📌 Move o botão para a esquerda da tela quando a barra some */
 .sidebar.collapsed ~ .sidebar-toggle,
 .sidebar.collapsed + .sidebar-toggle {
     left: 24px; 
@@ -267,7 +261,6 @@ a {
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
 }
 
-/* Área de Conteúdo Central */
 .main-content {
     padding: 40px;
     overflow-y: auto;
@@ -287,7 +280,6 @@ a {
     color: var(--text-muted);
 }
 
-/* Painel Lateral Direito (Atividade Recente / Inserção Rápida) */
 .right-panel {
     background-color: var(--bg-card);
     border-left: 1px solid var(--border-color);
@@ -399,9 +391,6 @@ a {
     color: var(--color-neg) !important;
 }
 
-/* ==========================================================================
-   MEDIA QUERIES - MODO RESPONSIVO COMPLETO
-   ========================================================================== */
 @media (max-width: 1100px) {
     .app-container {
         grid-template-columns: var(--sidebar-width) 1fr;
@@ -424,7 +413,6 @@ a {
         display: block;
     }
     
-    /* 📌 FIX: A barra lateral vira flutuante e para de empurrar o layout para baixo */
     .sidebar {
         position: fixed;
         left: 0;
@@ -437,7 +425,6 @@ a {
         padding: 24px;
     }
 
-    /* 📌 Dá um pequeno respiro no topo para o botão flutuante não cobrir o seu título */
     .main-content {
         padding-top: 72px;
     }
