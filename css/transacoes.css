@@ -1,0 +1,285 @@
+.card, .table-responsive-container, #table-transactions-body, .finance-table tr td,
+.btn-edit-action, .btn-danger-action, .btn-save-action, .btn-cancel-action,
+.form-select, .modal-overlay-comum, .modal-card-comum, .modal-card-comum button,
+#confirm-delete-btn, #cancel-delete-btn {
+    transition: var(--transition-premium) !important;
+}
+
+/* Container Card que envolve a tabela no seu HTML */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    width: 100%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Alinhamento dos Filtros mantendo a ID de cor #09090e do seu HTML */
+.form-select {
+    background-color: #09090e !important;
+    color: var(--text-highlight) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.form-select:focus {
+    border-color: var(--border-focus) !important;
+}
+
+/* Tabela Reativa */
+.table-responsive-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+}
+
+.finance-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.finance-table th {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.finance-table td {
+    padding: 14px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(61, 71, 78, 0.2);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.finance-table tr:hover td {
+    background-color: rgba(61, 71, 78, 0.15);
+}
+
+/* Distintivos (Badges) */
+.badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-ganho {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--color-pos);
+}
+
+.badge-gasto {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--color-neg);
+}
+
+.badge-categoria {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+/* Modificações inline durante edição */
+.form-input-inline,
+.form-select-inline {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: var(--text-highlight);
+    font-size: 13px;
+    outline: none;
+    width: 100%;
+}
+
+.form-input-inline:focus,
+.form-select-inline:focus {
+    border-color: var(--border-focus);
+}
+
+.row-editing td {
+    background-color: var(--bg-input) !important;
+}
+
+.action-buttons-wrap {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* Estilização Completa das Classes de Botão Geradas pelo Script */
+.btn-edit-action,
+.btn-danger-action,
+.btn-save-action,
+.btn-cancel-action {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-edit-action:hover {
+    border-color: var(--border-focus);
+    color: var(--color-accent);
+    transform: translateY(-1px) !important;
+}
+
+.btn-danger-action {
+    border-color: rgba(239, 68, 68, 0.2);
+    color: var(--color-neg);
+}
+
+.btn-danger-action:hover {
+    background-color: var(--color-neg) !important;
+    color: var(--text-highlight) !important;
+    border-color: var(--color-neg) !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-save-action {
+    background-color: var(--color-pos);
+    color: var(--bg-main);
+    border: none;
+    font-weight: 700;
+}
+
+.btn-save-action:hover {
+    transform: translateY(-1px) !important;
+    filter: brightness(1.1) !important;
+}
+
+.btn-cancel-action:hover {
+    transform: translateY(-1px) !important;
+    background-color: var(--bg-input) !important;
+    border-color: var(--border-focus) !important;
+    color: var(--text-highlight) !important;
+}
+
+.btn-edit-action:active,
+.btn-danger-action:active,
+.btn-save-action:active,
+.btn-cancel-action:active {
+    transform: translateY(0) !important;
+}
+
+/* Modais de Confirmação */
+.modal-overlay-comum {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(25, 34, 48, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 16px;
+}
+
+.modal-card-comum {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    animation: scaleUpPremium 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#confirm-delete-btn,
+#cancel-delete-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    filter: none !important;
+}
+
+#confirm-delete-btn {
+    background-color: var(--color-neg) !important;
+    color: var(--text-highlight) !important;
+    border-color: var(--color-neg) !important;
+}
+
+#confirm-delete-btn:hover {
+    filter: brightness(1.15) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+#cancel-delete-btn {
+    background-color: var(--bg-input) !important;
+    color: var(--text-main) !important;
+}
+
+#cancel-delete-btn:hover {
+    filter: none !important;
+    border-color: var(--border-focus) !important;
+    color: var(--text-highlight) !important;
+    transform: translateY(-1px) !important;
+}
+
+#confirm-delete-btn:active,
+#cancel-delete-btn:active {
+    transform: translateY(0) !important;
+}
+
+/* Responsividade de Linha */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .section-header div {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px !important;
+    }
+    .form-select {
+        width: 100%;
+    }
+}

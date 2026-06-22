@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbis - Metas</title>
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/metas.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      
+      <aside class="sidebar" id="sidebar-main">
+        <div class="sidebar-top">
+          <div class="app-logo">
+            <div class="logo-icon"></div>
+            <span class="sidebar-text">Fluxo</span>
+          </div>
+          <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+              <span class="nav-icon">📊</span> <span class="sidebar-text">Dashboard</span>
+            </a>
+            <a href="transacoes.html" class="nav-item">
+              <span class="nav-icon">💸</span> <span class="sidebar-text">Transações</span>
+            </a>
+            <a href="metas.html" class="nav-item active">
+              <span class="nav-icon">🎯</span> <span class="sidebar-text">Metas</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="user-profile">
+            <div class="avatar">KU</div>
+            <div class="user-info sidebar-text">
+              <span class="user-name">Carregando...</span>
+              <span class="user-plan">Plano Premium</span>
+            </div>
+          </div>
+          <button id="btn-logout" class="btn-logout">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span class="sidebar-text">Sair da Conta</span>
+          </button>
+        </div>
+      </aside>
+
+      <button class="sidebar-toggle" id="btn-sidebar-toggle">☰</button>
+
+      <main class="main-content">
+        <header class="content-header">
+          <div class="greeting-box">
+            <h1>Metas Financeiras</h1>
+            <p>Crie objetivos e guarde dinheiro para alcançá-los.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btn-nova-meta" style="background-color: var(--color-accent); color: var(--bg-main); font-weight: 700; border: none;">
+              + Nova Meta
+            </button>
+          </div>
+        </header>
+
+        <div id="metas-page-container"></div>
+      </main>
+
+      <aside class="right-panel">
+        
+        <div class="quick-add-box">
+            <h3 style="font-size: 14px; margin-bottom: 8px;">Inserção Rápida</h3>
+            <div class="quick-add-input-wrap">
+                <input type="text" id="quick-input" placeholder="-35 Lanche ou +120 Freela">
+                <button id="quick-add-btn" class="pos" style="background: none;">➔</button>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="font-size: 14px; margin-bottom: 16px;">Atividade Recente</h3>
+            <div id="transaction-container">
+                </div>
+        </div>
+        
+      </aside>
+    </div>
+
+    <div
+      id="modal-meta-overlay"
+      class="modal-overlay-comum"
+      style="display: none"
+    >
+      <div class="modal-card-comum">
+        <h3 style="margin-bottom: 16px;">🎯 Criar Novo Objetivo</h3>
+        <form id="form-nova-meta">
+          <div class="form-group-comum" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+            <label style="font-size: 12px; color: var(--text-muted);">Nome do Objetivo</label>
+            <input
+              type="text"
+              id="meta-nome"
+              class="form-input-inline"
+              placeholder="Ex: Setup Novo, Reserva, Viagem"
+              required
+            />
+          </div>
+          <div class="form-group-comum" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+            <label style="font-size: 12px; color: var(--text-muted);">Valor Alvo (R$)</label>
+            <input
+              type="number"
+              step="0.01"
+              id="meta-alvo"
+              class="form-input-inline"
+              placeholder="Ex: 5000"
+              required
+            />
+          </div>
+          <div class="modal-actions-comum" style="display: flex; gap: 12px;">
+            <button
+              type="button"
+              id="btn-cancelar-meta"
+              class="btn btn-secondary"
+              style="flex: 1;"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-save-action" style="flex: 1;">Criar Meta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="modal-aporte-overlay"
+      class="modal-overlay-comum"
+      style="display: none"
+    >
+      <div class="modal-card-comum">
+        <h3 id="aporte-modal-titulo">💰 Adicionar Dinheiro</h3>
+        <p
+          style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px"
+        >
+          Indique o valor que deseja alocar para este objetivo.
+        </p>
+        <form id="form-novo-aporte">
+          <input type="hidden" id="aporte-meta-id" />
+          <div class="form-group-comum" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+            <label style="font-size: 12px; color: var(--text-muted);">Valor do Aporte (R$)</label>
+            <input
+              type="number"
+              step="0.01"
+              id="aporte-valor"
+              class="form-input-inline"
+              placeholder="Ex: 150.00"
+              required
+            />
+          </div>
+          <div class="modal-actions-comum" style="display: flex; gap: 12px;">
+            <button
+              type="button"
+              id="btn-cancelar-aporte"
+              class="btn btn-secondary"
+              style="flex: 1;"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-save-action" style="flex: 1;">
+              Confirmar Aporte
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="modal-deletar-overlay"
+      class="modal-overlay-comum"
+      style="display: none"
+    >
+      <div
+        class="modal-card-comum"
+        style="border-color: rgba(239, 68, 68, 0.4)"
+      >
+        <h3 style="color: var(--color-neg) !important; margin-bottom: 8px;">⚠️ Excluir Objetivo</h3>
+        <p
+          style="
+            font-size: 13px;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin-bottom: 8px;
+          "
+        >
+          Tens a certeza de que desejas apagar o objetivo
+          <strong
+            id="deletar-meta-nome"
+            style="color: var(--text-highlight)"
+          ></strong
+          >?
+        </p>
+        <p
+          style="font-size: 12px; color: var(--text-muted); margin-bottom: 24px"
+        >
+          Esta ação é irreversível e o progresso guardado será perdido.
+        </p>
+        <input type="hidden" id="deletar-meta-id" />
+        <div class="modal-actions-comum" style="display: flex; gap: 12px; flex-direction: column;">
+          <button
+            type="button"
+            id="btn-confirmar-deletar"
+            class="btn"
+            style="
+              background-color: var(--color-neg);
+              color: #ffffff;
+              font-weight: 700;
+              width: 100%;
+            "
+          >
+            Excluir Permanentemente
+          </button>
+          <button
+            type="button"
+            id="btn-cancelar-deletar"
+            class="btn btn-secondary"
+            style="width: 100%;"
+          >
+            Manter Meta
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/global.js"></script>
+    <script src="./js/metas.js"></script>
+  </body>
+</html>

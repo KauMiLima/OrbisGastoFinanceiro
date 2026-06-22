@@ -1,0 +1,246 @@
+.card,
+.btn-deposit-action,
+.btn-delete-meta,
+.modal-card-comum,
+.modal-card-comum button {
+  transition: var(--transition-premium) !important;
+}
+
+#metas-page-container {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--text-muted) !important;
+  box-shadow: 0 8px 24px rgba(25, 34, 48, 0.3);
+  transform: translateY(-1px) !important;
+}
+
+.card:active {
+  transform: translateY(0) !important;
+}
+
+.meta-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.meta-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.meta-card-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.meta-pct-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-accent) !important;
+}
+
+.meta-acc-text {
+  font-size: 12px;
+  color: var(--text-main);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.alloc-bar-bg {
+  height: 8px;
+  background-color: var(--bg-main) !important;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(61, 71, 78, 0.3);
+}
+
+.alloc-bar-fill {
+  height: 100%;
+  background: var(--color-accent) !important;
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.meta-card-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-deposit-action {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-highlight);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.btn-deposit-action:hover {
+  background-color: var(--color-accent);
+  color: #192230;
+  border-color: var(--color-accent);
+  transform: translateY(-1px) !important;
+}
+
+.btn-delete-meta {
+  background: none;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--color-neg);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete-meta:hover {
+  background-color: var(--color-neg);
+  color: var(--text-highlight);
+  border-color: var(--color-neg);
+  transform: translateY(-1px) !important;
+}
+
+.btn-deposit-action:active,
+.btn-delete-meta:active {
+  transform: translateY(0) !important;
+}
+
+.meta-concluida-card {
+  border-color: var(--color-pos) !important;
+}
+
+.ribbon-celebracao {
+  position: absolute;
+  top: 12px;
+  right: -35px;
+  background-color: var(--color-pos);
+  color: var(--bg-main);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 40px;
+  transform: rotate(45deg);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.meta-concluida-card .alloc-bar-fill {
+  background: var(--color-pos) !important;
+}
+
+.meta-concluida-card .meta-pct-text {
+  color: var(--color-pos) !important;
+}
+
+.empty-state {
+  text-align: center;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-main);
+  grid-column: 1 / -1;
+}
+
+.modal-overlay-comum {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(25, 34, 48, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+}
+
+.modal-card-comum {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: scaleUpPremium 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-card-comum h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-highlight);
+}
+
+.form-group-comum {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group-comum label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group-comum input {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: var(--text-highlight);
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+}
+
+.form-group-comum input:focus {
+  border-color: var(--border-focus);
+}
+
+/* MEDIA QUERIES - METAS RESPONSIVAS */
+@media (max-width: 768px) {
+  #metas-page-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .meta-card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .btn-deposit-action,
+  .btn-delete-meta {
+    width: 100%;
+  }
+}
