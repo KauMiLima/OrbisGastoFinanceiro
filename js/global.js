@@ -1,14 +1,15 @@
 const sessao = JSON.parse(localStorage.getItem("fluxo_sessao_ativa"));
 const paginaAtual = window.location.pathname.split("/").pop();
 
+// Lógica de proteção de rotas e redirecionamento
 if (!sessao || Date.now() > sessao.expira) {
     localStorage.removeItem("fluxo_sessao_ativa");
-    if (paginaAtual !== "login.html" && paginaAtual !== "") {
-        window.location.href = "login.html";
+    if (paginaAtual !== "index.html" && paginaAtual !== "") {
+        window.location.href = "index.html"; // Redireciona para o login
     }
 } else {
-    if (paginaAtual === "login.html") {
-        window.location.href = "index.html";
+    if (paginaAtual === "index.html" || paginaAtual === "") {
+        window.location.href = "dashboard.html"; // Redireciona para o dashboard
     }
 }
 
@@ -20,39 +21,51 @@ function obterChaveUsuario(sufixo) {
 const fmtBRL = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 📌 Lógica da Sidebar - Declarada apenas UMA vez para evitar bugs na animação
+    // 📌 Lógica ÚNICA da Sidebar para evitar bugs na animação [cite: 7, 8, 20]
     const btnToggle = document.getElementById('btn-sidebar-toggle');
     const sidebar = document.getElementById('sidebar-main');
     
     if (btnToggle && sidebar) {
         btnToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
+            // Opcional: salvar estado no localStorage se quiser persistir entre páginas
+            if (sidebar.classList.contains('collapsed')) {
+                localStorage.setItem('fluxo_sidebar_collapsed', 'true');
+            } else {
+                localStorage.removeItem('fluxo_sidebar_collapsed');
+            }
         });
+    }
+
+    // Carregar estado persistente da sidebar
+    if (localStorage.getItem('fluxo_sidebar_collapsed') === 'true' && sidebar) {
+        sidebar.classList.add('collapsed');
     }
     
     if (sessao && sessao.user) {
         const userNameSidebar = document.querySelector(".user-name");
         const avatarEl = document.querySelector(".avatar");
-        const greetingTitle = document.querySelector(".greeting-box h1");
         
         if (userNameSidebar) userNameSidebar.innerText = sessao.user;
         if (avatarEl) avatarEl.innerText = sessao.user.charAt(0).toUpperCase();
     }
     
-    renderizarListaAtividadeRecente();
-    inicializarModoAnonimato();
+    // Inicialização de outras funcionalidades globais
+    if (typeof renderizarListaAtividadeRecente === "function") renderizarListaAtividadeRecente();
+    if (typeof inicializarModoAnonimato === "function") inicializarModoAnonimato();
     
     if (!window.location.pathname.includes("metas.html")) {
-        inicializarInputRapidoPadrao();
+        if (typeof inicializarInputRapidoPadrao === "function") inicializarInputRapidoPadrao();
     }
 });
 
+// Lógica do botão de logout
 document.addEventListener("click", (e) => {
     const btnLogout = e.target.closest("#btn-logout");
     if (btnLogout) {
         e.preventDefault();
         localStorage.removeItem("fluxo_sessao_ativa");
-        window.location.href = "login.html";
+        window.location.href = "index.html"; // Redireciona para o login
     }
 });
 

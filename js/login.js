@@ -97,7 +97,7 @@ function efetuarLoginSessao(nome, email) {
     expira: Date.now() + 1000 * 60 * 60 * 3,
   };
   localStorage.setItem("fluxo_sessao_ativa", JSON.stringify(tokenSessao));
-  window.location.href = "index.html";
+  window.location.href = "dashboard.html";
 }
 
 function mostrarPainelDesenvolvedor() {
