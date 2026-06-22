@@ -1,15 +1,17 @@
 const sessao = JSON.parse(localStorage.getItem("fluxo_sessao_ativa"));
 const paginaAtual = window.location.pathname.split("/").pop();
 
-// Lógica de proteção de rotas e redirecionamento
+// Adicionamos uma pequena verificação para evitar o redirecionamento indesejado
 if (!sessao || Date.now() > sessao.expira) {
     localStorage.removeItem("fluxo_sessao_ativa");
+    // Só redireciona para o index (login) se NÃO estiver já no index
     if (paginaAtual !== "index.html" && paginaAtual !== "") {
-        window.location.href = "index.html"; // Redireciona para o login
+        window.location.href = "index.html";
     }
 } else {
+    // Se estiver logado e estiver no index (login), mande para o dashboard
     if (paginaAtual === "index.html" || paginaAtual === "") {
-        window.location.href = "dashboard.html"; // Redireciona para o dashboard
+        window.location.href = "dashboard.html";
     }
 }
 
